@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TareasMVC.Entidades;
 
 namespace TareasMVC.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext: IdentityDbContext //Trae tablas por defecto para manejar usuarios
     {
         //DbContextOptions es una clase que contiene las opciones de configuracion
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
