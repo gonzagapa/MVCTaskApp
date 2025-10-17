@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using TareasMVC.Controllers;
 
 namespace TareasMVC.Entidades
 {
@@ -10,6 +12,11 @@ namespace TareasMVC.Entidades
         [StringLength(250,ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Titulo { get; set; }
+
+        //Relacionamos un usuario con una tarea
+        public string UsuarioCreacionId { get; set; }
+
+        public IdentityUser UsuarioCreacion { get; set; }
         public string Descripcion { get; set; }
         public int Orden { get; set; }
         public DateTime FechaCreacion { get; set; }

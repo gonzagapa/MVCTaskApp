@@ -14,6 +14,7 @@ var politicaUsuariosAunteticados = new AuthorizationPolicyBuilder()
 // Servicios 
 
 //Protegemos nuestras vistas de usuarios no autenticados
+
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new AuthorizeFilter(politicaUsuariosAunteticados));
@@ -22,7 +23,13 @@ builder.Services.AddControllersWithViews(options =>
 //Agregar el contexto al contenedor de servicios
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddAuthentication();
+
+builder.Services.AddAuthentication()
+    .AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+});
 
 //Agregar servicios de Identity al proyecto
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
